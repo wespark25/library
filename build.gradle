@@ -28,6 +28,12 @@ dependencies {
 	}
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('mysql:mysql-connector-java')
+
+//	TODO: Complete User Login https://spring.io/guides/gs/securing-web/
+//	compile("org.springframework.boot:spring-boot-starter-security")
+//	testCompile("junit:junit")
+//	testCompile("org.springframework.boot:spring-boot-starter-test")
+//	testCompile("org.springframework.security:spring-security-test")
 }
 
 bootRun {

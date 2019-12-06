@@ -18,4 +18,20 @@ public class Author {
     @OneToMany
     @JoinColumn(name = "author_id")
     private List<Book> books = new ArrayList<>();
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void addBook(Book book) {
+        this.books.add(book);
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
 }

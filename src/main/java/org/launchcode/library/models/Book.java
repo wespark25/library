@@ -20,8 +20,9 @@ public class Book {
     @NotNull
     private String description;
 
-    @NotNull
-    private Date datePublished;
+//    TODO: implement this into add form
+//    @NotNull
+//    private Date datePublished;
 
     @ManyToOne
     private Author author;
@@ -29,10 +30,10 @@ public class Book {
     public Book() {
     }
 
-    public Book(@NotNull String name, @NotNull Author author, @NotNull String description, @NotNull Date datePublished) {
+    public Book(@NotNull String name, @NotNull Author author, @NotNull String description) {
         this.name = name;
         this.description = description;
-        this.datePublished = datePublished;
+//        this.datePublished = datePublished;
     }
 
     public int getId() {
@@ -63,11 +64,11 @@ public class Book {
         this.description = description;
     }
 
-    public Date getDatePublished() {
-        return datePublished;
-    }
-
-    public void setDatePublished(Date datePublished) {
-        this.datePublished = datePublished;
-    }
+//    public Date getDatePublished() {
+//        return datePublished;
+//    }
+//
+//    public void setDatePublished(Date datePublished) {
+//        this.datePublished = datePublished;
+//    }
 }
