@@ -41,11 +41,13 @@ public class AuthorController {
     public String processAddAuthorForm(Model model, @ModelAttribute @Valid Author author, Errors errors){
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add a Book");
+            model.addAttribute("title", "Add a Author");
             return "author/add";
         }
 
         model.addAttribute("title", author.getName());
+        model.addAttribute("author", author);
+        authorDao.save(author);
         return "author/view";
 
     }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+    <h1 th:replace="fragments :: title"></h1>
+    <p th:unless="${books} and ${books.size()}">Nothing here yet</p>
+
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+    <!--        TODO: Fill these in later-->
+    <!--        <th>Genre</th>-->
+            <th>Description</th>
+    <!--        <th>Publication Date</th>-->
+        </tr>
+        <tr th:each="book : ${books}">
+            <th th:text="${book.title}">Title</th>
+            <th th:text="${book.author}">Author</th>
+            <th th:text="${book.description}">Description</th>
+        </tr>
+    </table>
+
+
+
+</body>
+</html>

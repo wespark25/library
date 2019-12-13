@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Entity
 public class Book {
@@ -15,7 +14,7 @@ public class Book {
     private int id;
 
     @NotNull
-    private String name;
+    private String title;
 
     @NotNull
     private String description;
@@ -30,8 +29,8 @@ public class Book {
     public Book() {
     }
 
-    public Book(@NotNull String name, @NotNull Author author, @NotNull String description) {
-        this.name = name;
+    public Book(@NotNull String name, @NotNull String description) {
+        this.title = name;
         this.description = description;
 //        this.datePublished = datePublished;
     }
@@ -40,12 +39,12 @@ public class Book {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Author getAuthor() {
