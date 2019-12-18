@@ -1,10 +1,8 @@
 package org.launchcode.library.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 public class Book {
@@ -26,6 +24,10 @@ public class Book {
     @ManyToOne
     private Author author;
 
+    @Column
+    @ElementCollection
+    private List<Genre> genres;
+
     public Book() {
     }
 
@@ -33,6 +35,10 @@ public class Book {
         this.title = name;
         this.description = description;
 //        this.datePublished = datePublished;
+    }
+
+    public void addGenre(Genre genre) {
+        genres.add(genre);
     }
 
     public int getId() {
@@ -61,6 +67,15 @@ public class Book {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
     }
 
 //    public Date getDatePublished() {

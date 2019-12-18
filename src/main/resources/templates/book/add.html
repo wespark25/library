@@ -24,6 +24,13 @@
             <input class="form-control" th:field="*{description}"/>
             <span class="errors" th:errors="*{description}"></span>
         </div>
+
+        <div th:each="genre : ${genres}" class="checkbox">
+            <input type="checkbox" name="genres" th:value="${genre}"  />
+            <label th:for="${genre.name}" th:text="${genre.name}"></label>
+            <br />
+        </div>
+
         <input type="submit" value="Add"/>
     </form>
 

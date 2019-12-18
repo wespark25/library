@@ -1,6 +1,9 @@
 package org.launchcode.library.models;
 
 public enum Genre {
+
+    FICTION("Fiction"),
+    NONFICTION("Non-fiction"),
     FANTASY("Fantasy"),
     ROMANCE("Romance"),
     CONTEMPORARY("Contemporary"),
