@@ -2,6 +2,8 @@ package org.launchcode.library.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -28,13 +30,18 @@ public class Book {
     @ElementCollection
     private List<Genre> genres;
 
+    private boolean inCart;
+
+    private boolean checkedOut;
+
     public Book() {
     }
 
     public Book(@NotNull String name, @NotNull String description) {
         this.title = name;
         this.description = description;
-//        this.datePublished = datePublished;
+        this.inCart = false;
+        this.checkedOut = false;
     }
 
     public void addGenre(Genre genre) {
@@ -69,7 +76,6 @@ public class Book {
         this.description = description;
     }
 
-
     public List<Genre> getGenres() {
         return genres;
     }
@@ -77,6 +83,23 @@ public class Book {
     public void setGenres(List<Genre> genres) {
         this.genres = genres;
     }
+
+    public boolean isInCart() {
+        return inCart;
+    }
+
+    public void setInCart(boolean inCart) {
+        this.inCart = inCart;
+    }
+
+    public boolean isCheckedOut() {
+        return checkedOut;
+    }
+
+    public void setCheckedOut(boolean checkedOut) {
+        this.checkedOut = checkedOut;
+    }
+
 
 //    public Date getDatePublished() {
 //        return datePublished;

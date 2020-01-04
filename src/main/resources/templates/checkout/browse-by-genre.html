@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <link th:href="@{/css/bookList.css}" rel="stylesheet">
+</head>
+<body class="container">
+<h1 th:replace="fragments :: title"></h1>
+<form method="post">
+</form>
+<table>
+    <tr th:each="genre : ${genres}">
+        <td ><a  th:text="${genre}"></a></td>
+<!--        <td ><a th:href="@{'/checkout/list/' + ${author.id}}" th:text="${author.name}"></a></td>-->
+        <!--        <a th:href="@{'/category/edit/' + ${category.idCategory}}">view</a>
+        -->
+    </tr>
+</table>
+</body>
+</html>

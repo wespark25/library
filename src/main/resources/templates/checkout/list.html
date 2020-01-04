@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:replace="fragments :: title"></h1>
+<table class="book-listing">
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <!--            TODO: Add Genre and other attributes-->
+    </tr>
+    <tr th:each="book : ${bookList}">
+        <td ><a th:href="'/browse/book/' + ${book.id}" th:text="${book.title}"></a></td>
+        <td ><a th:href="'/browse/author/' + ${book.author.id}" th:text="${book.author.name}"></a></td>
+    </tr>
+</table>
+
+</body>
+</html>

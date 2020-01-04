@@ -2,10 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body>
+<body class="container">
 <h1 th:replace="fragments :: title"></h1>
 <h2>Biography</h2>
 <p th:text="${author.bio}"></p>
-<p>Add his bibliography down here</p>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Genres</th>
+    </tr>
+    <tr th:each="book : ${bookList}">
+        <td> <a th:href="@{'/browse/book/' + ${book.id}}" th:text="${book.title}"></a></td>
+        <td th:text="${book.genres}"></td>
+<!--        <td th:text="${book.}"-->
+    </tr>
+
+</table>
 </body>
 </html>

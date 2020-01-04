@@ -3,10 +3,24 @@
 <head replace="fragments :: head"></head>
 
 <body class="container">
-    <h1 th:replace="fragments :: title"></h1>
-    <h3>Author</h3>
-    <p th:text="${book.author.name}"/>
-    <h3>Description</h3>
-    <p th:text="${book.description}"/>
+<h1 th:replace="fragments :: title"></h1>
+<h3>Author</h3>
+<p th:text="${book.author.name}"/>
+<h3>Description</h3>
+<p th:text="${book.description}"/>
+
+<form>
+    <button th:if="${book.inCart} == false"
+            th:formaction="'/browse/book/' + ${book.id}"
+            name="decision"
+            th:value="true">Add to Cart</button>
+    <div th:unless="${book.inCart} == false">
+        <h3>Item is in Your Cart</h3>
+        <button th:formaction="'/browse/book/' + ${book.id}"
+                name="decision"
+                th:value="false">Remove from Cart</button>
+    </div>
+</form>
+
 </body>
 </html>
