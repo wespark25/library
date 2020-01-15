@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body class="container">
+<div th:replace="fragments :: header"></div>
+<form method="post">
+    <div th:each="book : ${books}">
+        <input type="checkbox" name="bookIds" th:value="${book.id}" th:id="${book.id}"/>
+        <label th:for="${book.id}" th:text="${book.title}"></label>
+        <label th:for="${book.id}" th:text="'Due ' + ${book.timeCheckedOut}"></label>
+        <br/>
+    </div>
+    <input type="submit" value="Return Book(s)">
+</form>
+</body>
+</html>

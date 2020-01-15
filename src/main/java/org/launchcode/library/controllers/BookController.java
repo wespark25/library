@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.Optional;
+import java.util.List;
 
 @Controller
 @RequestMapping("book")
@@ -32,7 +32,6 @@ public class BookController {
 
         model.addAttribute("title", "Welcome to Wesley's Library!");
         return "book/index";
-
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
@@ -44,7 +43,6 @@ public class BookController {
         model.addAttribute(("genres"), Genre.values());
 
         return "book/add";
-
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
@@ -70,7 +68,34 @@ public class BookController {
         bookDao.save(book);
         model.addAttribute("book", book);
         return "book/view";
-
     }
 
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveBookForm(Model model) {
+
+        model.addAttribute("title", "Delete Books");
+        model.addAttribute("authors", bookDao.findAll());
+        return "book/remove";
+    }
+
+    @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemoveAuthorForm(Model model, @RequestParam int authorId) {
+        model.addAttribute("title", "Delete Author");
+        Author author = authorDao.findById(authorId).get();
+        List<Book> books = author.getBooks();
+        for (Book book : books) {
+            bookDao.delete(book);
+        }
+        authorDao.delete(author);;
+        model.addAttribute("authors", authorDao.findAll());
+        return "author/remove";
+    }
+
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public String displayFindByForm(Model model) {
+        model.addAttribute("title", "Browse: All");
+        Iterable<Book> bookList = bookDao.findAll();
+        model.addAttribute("bookList", bookList);
+        return "book/list";
+    }
 }

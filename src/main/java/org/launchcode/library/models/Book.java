@@ -3,6 +3,7 @@ package org.launchcode.library.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -19,16 +20,20 @@ public class Book {
     @NotNull
     private String description;
 
-//    TODO: implement this into add form
-//    @NotNull
-//    private Date datePublished;
-
     @ManyToOne
     private Author author;
+
+    @ManyToOne
+    Backpack backpack;
+
+
 
     @Column
     @ElementCollection
     private List<Genre> genres;
+
+//    TODO: change the name of this to due date
+    private LocalTime timeCheckedOut;
 
     private boolean inCart;
 
@@ -100,12 +105,19 @@ public class Book {
         this.checkedOut = checkedOut;
     }
 
+    public LocalTime getTimeCheckedOut() {
+        return timeCheckedOut;
+    }
 
-//    public Date getDatePublished() {
-//        return datePublished;
-//    }
-//
-//    public void setDatePublished(Date datePublished) {
-//        this.datePublished = datePublished;
-//    }
+    public void setTimeCheckedOut(LocalTime timeCheckedOut) {
+        this.timeCheckedOut = timeCheckedOut;
+    }
+
+    public Backpack getBackpack() {
+        return backpack;
+    }
+
+    public void setBackpack(Cart cart) {
+        this.backpack = backpack;
+    }
 }

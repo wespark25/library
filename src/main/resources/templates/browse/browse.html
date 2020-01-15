@@ -4,13 +4,14 @@
     <link th:href="@{/css/bookList.css}" rel="stylesheet">
 </head>
 <body class="container">
-<h1 th:replace="fragments :: title"></h1>
-    <h3>List by</h3>
+<div th:replace="fragments :: header"></div>
+
+
+    <h4>List by</h4>
     <ul>
-        <li><a href="/browse/list/all">All</a></li>
-        <li><a href="/browse/list/author">Author</a></li>
+        <li><a href="/book/list/">All Books</a></li>
+        <li><a href="/author/list/">Authors</a></li>
         <li><a href="/browse/list/genre">Genre</a></li>
     </ul>
-    <h3><a>Search</a></h3>
 </body>
 </html>

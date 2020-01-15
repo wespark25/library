@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<div th:replace="fragments :: header"></div>
+
+
+    <p>These Books will be due in 4:00 minutes</p>
+<ul>
+    <li th:each="book : ${cart}"><a th:href="'/browse/book/' + ${book.id}"
+                                    th:text="${book.title}"></a></li>
+</ul>
+    <form method="post">
+        <input type="submit" value="Checkout">
+    </form>
+</body>
+</html>

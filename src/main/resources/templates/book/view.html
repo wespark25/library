@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head replace="fragments :: head"></head>
+<head th:replace="fragments :: head"></head>
 
 <body class="container">
-<h1 th:replace="fragments :: title"></h1>
+<div th:replace="fragments :: header"></div>
 <h3>Author</h3>
 <p th:text="${book.author.name}"/>
 <h3>Description</h3>
 <p th:text="${book.description}"/>
 
 <form>
-    <button th:if="${book.inCart} == false"
+<!--    todo: use a switch case to handle these options-->
+    <button th:if="${book.inCart} == false and ${book.checkedOut} == false"
             th:formaction="'/browse/book/' + ${book.id}"
             name="decision"
-            th:value="true">Add to Cart</button>
-    <div th:unless="${book.inCart} == false">
-        <h3>Item is in Your Cart</h3>
+            th:value="add">Add to Cart</button>
+    <div th:if="${book.inCart} == true and ${book.checkedOut} == false">
+        <h3>This Book is in Your Cart</h3>
         <button th:formaction="'/browse/book/' + ${book.id}"
                 name="decision"
-                th:value="false">Remove from Cart</button>
+                th:value="remove">Remove from Cart</button>
     </div>
+        <h3 th:if="${book.inCart} == false and ${book.checkedOut} == true">This Book is Currently Checked Out</h3>
 </form>
 
 </body>

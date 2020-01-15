@@ -1,28 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-
 <body class="container">
-    <h1 th:replace="fragments :: title"></h1>
-    <p th:unless="${books} and ${books.size()}">Nothing here yet</p>
-
-    <table class="table">
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-    <!--        TODO: Fill these in later-->
-    <!--        <th>Genre</th>-->
-            <th>Description</th>
-    <!--        <th>Publication Date</th>-->
-        </tr>
-        <tr th:each="book : ${books}">
-            <th th:text="${book.title}">Title</th>
-            <th th:text="${book.author}">Author</th>
-            <th th:text="${book.description}">Description</th>
-        </tr>
-    </table>
+<div th:replace="fragments :: header"></div>
 
 
+<table class="book-listing">
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <!--            TODO: Add Genre and other attributes-->
+    </tr>
+    <tr th:each="book : ${bookList}">
+        <td ><a th:href="'/browse/book/' + ${book.id}" th:text="${book.title}"></a></td>
+        <td ><a th:href="'/browse/author/' + ${book.author.id}" th:text="${book.author.name}"></a></td>
+    </tr>
+</table>
 
 </body>
 </html>

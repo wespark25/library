@@ -3,7 +3,8 @@
 <head th:replace="fragments :: head"></head>
 
 <body class="container">
-<h1 th:replace="fragments :: title"></h1>
+<div th:replace="fragments :: header"></div>
+
 <h2>Biography</h2>
 <p th:text="${author.bio}"></p>
 <table>

@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title></title>
+<head th:replace="fragments :: head">
 </head>
-<body>
-
+<body class="container">
+<div th:replace="fragments :: header"></div>
+<form method="post">
+</form>
+<ul>
+    <li th:each="author : ${authors}"
+    ><a th:href="@{'/browse/author/' + ${author.id}}" th:text="${author.name}"></a></li>
+</ul>
 </body>
 </html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head><head th:replace="fragments :: head"></head>
+</head>
+<body class="container">
+<div th:replace="fragments :: header"></div>
+<form method="post">
+    <div th:each="author : ${authors}">
+        <input type="radio" name="authorId" th:value="${author.id}">
+        <label th:for="${author.id}" th:text="${author.name}"></label>
+    </div>
+    <input type="submit" value="Remove Author(s)"/>
+    <h4>WARNING! THIS IS WILL ALSO REMOVE BOOKS ASSOCIATED WITH REMOVED AUTHORS</h4>
+</form>
+
+
+</body>
+</html>

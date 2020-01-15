@@ -3,7 +3,7 @@
 <head th:replace="fragments :: head"></head>
 
 <body class="container">
-    <h1 th:replace="fragments :: title"></h1>
+<div th:replace="fragments :: header"></div>
     <form method="post" th:object="${book}">
         <div class="form-group">
             <label th:for="title">Title</label>

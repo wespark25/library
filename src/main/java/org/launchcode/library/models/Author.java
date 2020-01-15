@@ -17,12 +17,14 @@ public class Author {
     @Size(min = 3, max = 100)
     private String name;
 
-
     private String bio;
 
     @OneToMany
     @JoinColumn(name = "author_id")
     private List<Book> books = new ArrayList<>();
+
+    public Author() {
+    }
 
     public int getId() {
         return id;

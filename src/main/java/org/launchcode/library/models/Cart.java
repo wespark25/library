@@ -1,29 +1,61 @@
 package org.launchcode.library.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Cart {
 
 //    TODO: After User object is created I need to link individual carts with different users.
-//    @GeneratedValue
-//    @Id
-//    public int id;
+    @GeneratedValue
+    @Id
+    public int id;
 
-//    @OneToMany
-//    @JoinColumn(name = "book_id")
-    static List<Book> books;
+    @OneToOne
+    private User user;
+
+    @OneToMany
+    @JoinColumn(name = "book_id")
+    private List<Book> books = new ArrayList<>();
+
+    @NotNull
+    private boolean checkedOut = false;
+
+    private LocalTime dueDate;
+
+    public void Cart() {
+
+    }
 
 //    This will be static while there is only one user
-    public static List<Book> getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
     public void addBook(Book book){
-        books.add(book);
+        this.books.add(book);
+    }
+    public void removeBook(Book book) {
+        this.books.remove(book);
+    }
+    public void removeBooks(List<Book> booksList) {
+        for (Book book : booksList) {
+            books.remove(book);
+        }
+    }
+    public boolean isCheckedOut() {
+        return checkedOut;
+    }
+    public void setCheckedOut(boolean checkedOut) {
+        this.checkedOut = checkedOut;
+    }
+    public LocalTime getDueDate() {
+        return dueDate;
     }
 
-    public void removeBook(Book book) {
-        books.remove(book);
+    public void setDueDate(LocalTime dueDate) {
+        this.dueDate = dueDate;
     }
 }

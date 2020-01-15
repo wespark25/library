@@ -9,17 +9,20 @@
 
 </head>
 <body>
+<div th:fragment="header">
     <h1 th:fragment="title" th:text="${title}">Default Title</h1>
-    <nav th:fragment="bookNavigation">
-        <a href="/book/add">Add Book</a>
-    </nav>
-    <nav th:fragment="checkoutNavigation">
+    <nav th:fragment="browseNavigation">
         <a href="/browse">Browse</a> |
-        <a href="/cart">Cart</a> |
-        <a href="/checkout">Checkout</a>
+        <a href="/checkout">Checkout</a> |
+        <a href="/return">Return</a>
     </nav>
-<!--    <nav th:fragment="browseNavigation">-->
-<!--        <a href=""-->
-<!--    </nav>-->
+    <nav th:fragment="editNavigation" style="font-size:10px">
+        <a href="/book/add">Add Book</a> |
+        <a href="/book/remove">Remove Book</a> |
+        <a href="/author/add">Add Author</a> |
+        <a href="/author/remove">Remove Author</a>
+
+    </nav>
+</div>
 </body>
 </html>
