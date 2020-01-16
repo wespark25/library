@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("book")
@@ -74,21 +73,18 @@ public class BookController {
     public String displayRemoveBookForm(Model model) {
 
         model.addAttribute("title", "Delete Books");
-        model.addAttribute("authors", bookDao.findAll());
+        model.addAttribute("books", bookDao.findAll());
         return "book/remove";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveAuthorForm(Model model, @RequestParam int authorId) {
-        model.addAttribute("title", "Delete Author");
-        Author author = authorDao.findById(authorId).get();
-        List<Book> books = author.getBooks();
-        for (Book book : books) {
-            bookDao.delete(book);
+    public String processRemoveBookForm(Model model, @RequestParam int[] bookIds) {
+        model.addAttribute("title", "Delete Books");
+        for (int id : bookIds) {
+            bookDao.delete(bookDao.findById(id).get());
         }
-        authorDao.delete(author);;
-        model.addAttribute("authors", authorDao.findAll());
-        return "author/remove";
+        model.addAttribute("books", bookDao.findAll());
+        return "book/remove";
     }
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
