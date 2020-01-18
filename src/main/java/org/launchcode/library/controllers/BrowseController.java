@@ -3,6 +3,7 @@ package org.launchcode.library.controllers;
 
 import org.launchcode.library.models.*;
 import org.launchcode.library.models.data.*;
+import org.launchcode.library.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class BrowseController {
 
     @Autowired
     AuthorDao authorDao;
+
 
     @Autowired
     BookDao bookDao;
@@ -33,9 +36,8 @@ public class BrowseController {
     @Autowired
     UserDao userDao;
 
-//    TODO: DELETE AFTER USER IMPLEMENTATION
-//    @Autowired
-//    UserDetails details;
+    @Autowired
+    User2Dao user2Dao;
 
     int backPackid = 7;
 
@@ -43,26 +45,12 @@ public class BrowseController {
     public String index(Model model) {
         model.addAttribute("title", "Behold My Library and Weep!");
 
-        //    TODO: FINAL CHANGE
-//        if (userDao.count() == 0) {
-//            Backpack backpack = new Backpack();
-//            Cart cart = new Cart();
-//            String username = details.getUsername();
-//            User user = new User();
-//            userDao.save(user);
-//            cartDao.save(cart);
-//            backpackDao.save(backpack);
-//        }
-
-
-
         return "browse/index";
     }
 
     @RequestMapping(value = "browse", method = RequestMethod.GET)
     public String displayBrowseForm(Model model) {
         model.addAttribute("title", "Browse");
-//        model.addAttribute("authors", authorDao.findAll());
 //        TODO: Rename this file
         return "browse/browse";
     }
@@ -73,7 +61,6 @@ public class BrowseController {
             model.addAttribute("title", "Browse: Genres");
             model.addAttribute("genres", Genre.values());
             return "browse/browse-by-genre";
-
     }
 
     //    TODO: This is still returning duplicates
@@ -86,25 +73,24 @@ public class BrowseController {
 
     @RequestMapping(value = "browse/book/{bookId}", method = RequestMethod.GET)
     public String displayViewBookForm(Model model, @PathVariable int bookId,
-                                      @RequestParam(required = false) String decision) {
+                                      @RequestParam(required = false) String decision,
+                                        Principal principal) {
+
         Book book = bookDao.findById(bookId).get();
         model.addAttribute("title", book.getTitle());
-//        Todo: too many ifs
+
+        User2 user2 = user2Dao.findByUsername(principal.getName());
+        Cart cart = user2.getCart();
+
+//        Todo: Figure out how to block button from submitting without selection
         if (decision != null) {
             if (decision.equals("add")) {
 //                TODO: CHANGE AFTER CLASS IMPLEMENTATION
-                if (cartDao.count() == 0) {
-                    Cart cart = new Cart();
-                    cartDao.save(cart);
-                }
-                Cart cart = cartDao.findById(6).get();
                 cart.addBook(book);
                 book.setInCart(true);
                 cartDao.save(cart);
             } else if (decision.equals("remove")) {
                 book.setInCart(false);
-                Cart cart = cartDao.findById(6).get();
-//                Cart cart = cartDao.findByCheckedOut(false);
                 cart.removeBook(book);
                 cartDao.save(cart);
             }
@@ -185,4 +171,6 @@ public class BrowseController {
         model.addAttribute("books", backpack.getBooks());
         return "browse/return";
         }
-    }
+
+
+}

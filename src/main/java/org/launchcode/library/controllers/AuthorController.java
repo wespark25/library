@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.util.List;
 
-
 @Controller
 @RequestMapping("author")
 public class AuthorController {
@@ -33,7 +32,6 @@ public class AuthorController {
         model.addAttribute("title", "Authors");
         model.addAttribute("authors", authorDao.findAll());
         return "author/index";
-
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
@@ -42,7 +40,6 @@ public class AuthorController {
         model.addAttribute("title", "Add an author");
         model.addAttribute(new Author());
         return "author/add";
-
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
@@ -57,7 +54,6 @@ public class AuthorController {
         model.addAttribute("author", author);
         authorDao.save(author);
         return "author/view";
-
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
@@ -87,6 +83,4 @@ public class AuthorController {
             model.addAttribute("authors", authorDao.findAll());
             return "author/list";
     }
-
-
 }
