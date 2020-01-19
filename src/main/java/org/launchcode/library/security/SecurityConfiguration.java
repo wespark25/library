@@ -28,9 +28,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-//                TODO: inable csrf again;
+//                Todo: Reactivate csrf and secure website using tokens
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").authenticated()
+                .antMatchers("/browse/**").authenticated()
+                .antMatchers("/checkout/**").authenticated()
+                .antMatchers("/return/**").authenticated()
                 .antMatchers("/book/add").hasRole("ADMIN")
                 .antMatchers("/book/remove").hasRole("ADMIN")
                 .antMatchers("/author/add").hasRole("ADMIN")

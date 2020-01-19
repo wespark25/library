@@ -4,11 +4,13 @@
 </head>
 <body class="container">
 <div th:replace="fragments :: header"></div>
-<form method="post">
+<form th:if="${books} and ${books.size()}" method="post">
     <div th:each="book : ${books}">
-        <input type="checkbox" name="bookIds" value="${book.id}" th:id="${book.id}">
+        <input type="checkbox" name="bookIds" th:value="${book.id}" th:id="${book.id}">
         <label th:for="${book.id}" th:text="${book.title}"></label>
     </div>
+    <input type="submit" value="Delete Books"/>
 </form>
+<p th:unless="${books} and ${books.size()}">No books in library</p>
 </body>
 </html>

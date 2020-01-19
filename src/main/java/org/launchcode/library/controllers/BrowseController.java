@@ -3,8 +3,8 @@ package org.launchcode.library.controllers;
 
 import org.launchcode.library.models.*;
 import org.launchcode.library.models.data.*;
-import org.launchcode.library.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,11 +35,6 @@ public class BrowseController {
 
     @Autowired
     UserDao userDao;
-
-    @Autowired
-    User2Dao user2Dao;
-
-    int backPackid = 7;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -79,8 +74,8 @@ public class BrowseController {
         Book book = bookDao.findById(bookId).get();
         model.addAttribute("title", book.getTitle());
 
-        User2 user2 = user2Dao.findByUsername(principal.getName());
-        Cart cart = user2.getCart();
+        User user = userDao.findByUsername(principal.getName());
+        Cart cart = user.getCart();
 
 //        Todo: Figure out how to block button from submitting without selection
         if (decision != null) {
@@ -110,26 +105,23 @@ public class BrowseController {
     }
 
     @RequestMapping(value = "checkout", method = RequestMethod.GET)
-    public String displayCheckoutForm(Model model) {
+    public String displayCheckoutForm(Model model, Principal principal) {
         model.addAttribute("title", "Checkout");
-        model.addAttribute("cart", cartDao.findById(6).get().getBooks());
+        User user = userDao.findByUsername(principal.getName());
+        Cart cart = user.getCart();
+        model.addAttribute("cart", cart.getBooks());
         return "browse/checkout";
     }
 
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
     @RequestMapping(value = "checkout", method = RequestMethod.POST)
-    public String processCheckoutForm(Model model) {
+    public String processCheckoutForm(Model model, Principal principal) {
 
         LocalTime time = LocalTime.now().plusMinutes(4);
-//        TODO: Change this to find the user's cart after users are implemented
-        Cart cart = cartDao.findById(6).get();
 
-//        TODO: CHANGE AFTER USER IMPLEMENTATION
-        if (backpackDao.count() == 0){
-            Backpack backpack = new Backpack();
-            backPackid = backpack.getId();
-            backpackDao.save(backpack);
-        }
-        Backpack backpack = backpackDao.findById(backPackid).get();
+        User user = userDao.findByUsername(principal.getName());
+        Cart cart = user.getCart();
+        Backpack backpack = user.getBackpack();
 
         backpack.addBooks(cart.getBooks());
         backpackDao.save(backpack);
@@ -146,20 +138,28 @@ public class BrowseController {
     }
 
     @RequestMapping(value = "return", method = RequestMethod.GET)
-    public String displayReturnForm(Model model) {
+    public String displayReturnForm(Model model, Principal principal) {
+
         model.addAttribute("title", "Return Books");
-        Backpack backpack = backpackDao.findById(backPackid).get();
+
+        User user = userDao.findByUsername(principal.getName());
+        Cart cart = user.getCart();
+        Backpack backpack = user.getBackpack();
+
 //        TODO: CHANGE AFTER USER IMPLEMENTATION
-        List<Book> books = backpackDao.findById(backPackid).get().getBooks();
+        List<Book> books = backpack.getBooks();
         model.addAttribute("books",books);
 
         return "browse/return";
     }
 
     @RequestMapping(value = "return", method = RequestMethod.POST)
-    public String processReturnForm(Model model, @RequestParam int[] bookIds) {
+    public String processReturnForm(Model model, @RequestParam int[] bookIds, Principal principal) {
+
         model.addAttribute("title", "Return Books");
-        Backpack backpack = backpackDao.findById(backPackid).get();
+
+        User user = userDao.findByUsername(principal.getName());
+        Backpack backpack = user.getBackpack();
         for (int id : bookIds) {
             Book book = bookDao.findById(id).get();
             backpack.removeBook(book);

@@ -4,15 +4,14 @@
 </head>
 <body class="container">
 <div th:replace="fragments :: header"></div>
-<form method="post">
+<form th:if="${authors} and ${authors.size()}" method="post">
     <div th:each="author : ${authors}">
         <input type="radio" name="authorId" th:value="${author.id}">
         <label th:for="${author.id}" th:text="${author.name}"></label>
     </div>
-    <input type="submit" value="Remove Author(s)"/>
-    <h4>WARNING! THIS IS WILL ALSO REMOVE BOOKS ASSOCIATED WITH REMOVED AUTHORS</h4>
+    <input type="submit" value="Remove Author"/>
+    <p>WARNING! THIS IS WILL ALSO REMOVE BOOKS ASSOCIATED WITH REMOVED AUTHORS</p>
 </form>
-
-
+<p>No authors in library</p>
 </body>
 </html>

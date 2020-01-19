@@ -1,6 +1,6 @@
 package org.launchcode.library.security;
 
-import org.launchcode.library.models.User2;
+import org.launchcode.library.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,10 +10,10 @@ import java.util.Collection;
 import java.util.List;
 
 public class UserPrincipal implements UserDetails {
-    private User2 user2;
+    private User user;
 
-    public UserPrincipal(User2 user2) {
-        this.user2 = user2;
+    public UserPrincipal(User user) {
+        this.user = user;
     }
 
     @Override
@@ -21,14 +21,14 @@ public class UserPrincipal implements UserDetails {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
 //        Extract list of permissions (name)
-        this.user2.getPermissionList().forEach(p ->{
+        this.user.getPermissionList().forEach(p ->{
             GrantedAuthority authority = new SimpleGrantedAuthority(p);
             authorities.add(authority);
         });
 
 //        Extract list of roles (ROLE_name)
-        this.user2.getRoleList().forEach(r ->{
-            GrantedAuthority authority = new SimpleGrantedAuthority("ROLE" + r);
+        this.user.getRoleList().forEach(r ->{
+            GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + r);
             authorities.add(authority);
         });
         return authorities;
@@ -36,16 +36,16 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.user2.getPassword();
+        return this.user.getPassword();
     }
 
     public int getId(){
-        return this.user2.getId();
+        return this.user.getId();
     }
 
     @Override
     public String getUsername() {
-        return this.user2.getUsername();
+        return this.user.getUsername();
     }
 
     @Override

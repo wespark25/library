@@ -42,8 +42,9 @@ public class Book {
     public Book() {
     }
 
-    public Book(@NotNull String name, @NotNull String description) {
+    public Book(@NotNull String name, @NotNull Author author, @NotNull String description) {
         this.title = name;
+        this.author = author;
         this.description = description;
         this.inCart = false;
         this.checkedOut = false;

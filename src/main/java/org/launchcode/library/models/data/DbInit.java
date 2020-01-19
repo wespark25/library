@@ -1,8 +1,6 @@
 package org.launchcode.library.models.data;
 
-import org.launchcode.library.models.Backpack;
-import org.launchcode.library.models.Cart;
-import org.launchcode.library.models.User2;
+import org.launchcode.library.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,43 +13,67 @@ import java.util.List;
 public class DbInit implements CommandLineRunner {
 
     @Autowired
-    private User2Dao user2Dao;
+    private UserDao userDao;
 
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    private BookDao bookDao;
+    @Autowired
+    AuthorDao authorDao;
+    @Autowired
     private BackpackDao backpackDao;
-
     @Autowired
     private CartDao cartDao;
 
-    public DbInit(User2Dao user2Dao, PasswordEncoder passwordEncoder) {
-        this.user2Dao = user2Dao;
+    public DbInit(UserDao userDao, PasswordEncoder passwordEncoder) {
+        this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        this.user2Dao.deleteAll();
-        this.backpackDao.deleteAll();
-        this.cartDao.deleteAll();
+        if(bookDao.count() == 0 && authorDao.count() == 0){
 
-        Backpack backpack = new Backpack();
-        backpackDao.save(backpack);
-        Cart cart = new Cart();
-        cartDao.save(cart);
+            Author deLillo = new Author("Don DeLillo", "Pretty dang good author");
+            Book whiteNoise = new Book("White Noise", deLillo, "Don't get me started on that dang barn");
+            Book underWorld = new Book("Underworld", deLillo, "This book is a home run");
+            authorDao.save(deLillo);
+            bookDao.save(whiteNoise);
+            bookDao.save(underWorld);
 
-        Backpack backpack2 = new Backpack();
-        backpackDao.save(backpack2);
-        Cart cart2 = new Cart();
-        cartDao.save(cart2);
+            Author wallace = new Author("David Foster Wallace", "Neurotic");
+            Book infiniteJest = new Book("Infinite Jest", wallace, "About as good as it is mentally taxing");
+            authorDao.save(wallace);
+            bookDao.save(infiniteJest);
+        }
+        if(userDao.count() != 2) {
+            this.userDao.deleteAll();
+            this.backpackDao.deleteAll();
+            this.cartDao.deleteAll();
+            for (Book book : bookDao.findAll()) {
+                book.setInCart(false);
+                book.setCheckedOut(false);
+                bookDao.save(book);
+            }
 
-        User2 user = new User2("user",passwordEncoder.encode("pass"),"USER","",backpack,cart);
-        User2 admin = new User2("admin",passwordEncoder.encode("pass"),"ADMIN","",backpack2,cart2);
+            Backpack backpack = new Backpack();
+            backpackDao.save(backpack);
+            Cart cart = new Cart();
+            cartDao.save(cart);
 
-        List<User2> users = Arrays.asList(user, admin);
+            Backpack backpack2 = new Backpack();
+            backpackDao.save(backpack2);
+            Cart cart2 = new Cart();
+            cartDao.save(cart2);
 
-        this.user2Dao.saveAll(users);
+            User user = new User("user", passwordEncoder.encode("pass"), "USER", "", backpack, cart);
+            User admin = new User("admin", passwordEncoder.encode("pass"), "ADMIN", "", backpack2, cart2);
+
+            List<User> users = Arrays.asList(user, admin);
+
+            this.userDao.saveAll(users);
+        }
     }
 
 }

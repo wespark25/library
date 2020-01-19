@@ -6,6 +6,7 @@ import org.launchcode.library.models.Genre;
 import org.launchcode.library.models.data.AuthorDao;
 import org.launchcode.library.models.data.BookDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @Controller
@@ -46,7 +48,7 @@ public class BookController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddBookForm(Model model, @ModelAttribute @Valid Book book, Errors errors,
-                                     @RequestParam int authorId,  @RequestParam Genre[] genres){
+                                     @RequestParam int authorId,  @RequestParam(required=false) Genre[] genres){
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add a Book");

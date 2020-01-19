@@ -26,12 +26,13 @@ dependencies {
 	compile('mysql:mysql-connector-java')
 	runtime('org.springframework.boot:spring-boot-devtools')
 
-//	TODO: Complete User Login https://spring.io/guides/gs/securing-web/
 	compile("org.springframework.boot:spring-boot-starter-security")
 	testCompile("junit:junit")
 	testCompile("org.springframework.boot:spring-boot-starter-test")
 	testCompile("org.springframework.security:spring-security-test")
 	compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
+	compile("org.springframework.security:spring-security-config")
+
 }
 
 bootRun {

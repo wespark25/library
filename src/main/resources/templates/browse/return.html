@@ -4,7 +4,7 @@
 </head>
 <body class="container">
 <div th:replace="fragments :: header"></div>
-<form method="post">
+<form th:if="${books} and ${books.size()}" method="post">
     <div th:each="book : ${books}">
         <input type="checkbox" name="bookIds" th:value="${book.id}" th:id="${book.id}"/>
         <label th:for="${book.id}" th:text="${book.title}"></label>
@@ -13,5 +13,6 @@
     </div>
     <input type="submit" value="Return Book(s)">
 </form>
+<p th:unless="${books} and ${books.size()}">No books to return</p>
 </body>
 </html>

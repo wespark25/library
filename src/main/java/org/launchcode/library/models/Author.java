@@ -26,6 +26,12 @@ public class Author {
     public Author() {
     }
 
+    public Author(@NotNull @Size(min = 3, max = 100) String name, String bio) {
+        this.name = name;
+        this.bio = bio;
+        this.books = books;
+    }
+
     public int getId() {
         return id;
     }
