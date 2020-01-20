@@ -2,6 +2,7 @@ package org.launchcode.library.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
@@ -15,9 +16,11 @@ public class Book {
     private int id;
 
     @NotNull
+    @Size(min=1,max=100)
     private String title;
 
     @NotNull
+    @Size(min=1,max=100)
     private String description;
 
     @ManyToOne
@@ -42,10 +45,11 @@ public class Book {
     public Book() {
     }
 
-    public Book(@NotNull String name, @NotNull Author author, @NotNull String description) {
+    public Book(@NotNull String name, @NotNull Author author, @NotNull String description, List<Genre> genres) {
         this.title = name;
         this.author = author;
         this.description = description;
+        this.genres = genres;
         this.inCart = false;
         this.checkedOut = false;
     }

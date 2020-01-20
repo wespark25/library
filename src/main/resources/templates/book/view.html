@@ -4,25 +4,23 @@
 
 <body class="container">
 <div th:replace="fragments :: header"></div>
-<h3>Author</h3>
-<p th:text="${book.author.name}"/>
-<h3>Description</h3>
+<h4>Title</h4>
+<p th:text="${book.title}"></p>
+<h4>Author</h4>
+<a th:href="'/browse/author/' + ${book.author.id}" th:text="${book.author.name}"></a>
+<h4>Description</h4>
 <p th:text="${book.description}"/>
 
-<form>
-<!--    todo: use a switch case to handle these options-->
-    <button th:if="${book.inCart} == false and ${book.checkedOut} == false"
-            th:formaction="'/browse/book/' + ${book.id}"
-            name="decision"
-            th:value="add">Add to Cart</button>
-    <div th:if="${book.inCart} == true and ${book.checkedOut} == false">
+<form th:if="${book.checkedOut} == false" method="post">
+    <input th:if="${book.inCart} == false"
+           type="hidden" name="decision" th:value="add">
+    <div th:if="${book.inCart} == true">
         <h3>This Book is in Your Cart</h3>
-        <button th:formaction="'/browse/book/' + ${book.id}"
-                name="decision"
-                th:value="remove">Remove from Cart</button>
+        <input type="hidden" name="decision" th:value="remove">
     </div>
-        <h3 th:if="${book.inCart} == false and ${book.checkedOut} == true">This Book is Currently Checked Out</h3>
+    <button type="submit" th:formaction="'/browse/book/' + ${book.id}" th:text="${buttonText}"></button>
 </form>
+<h3 th:if="${book.checkedOut} == true">This Book is Currently Checked Out</h3>
 
 </body>
 </html>

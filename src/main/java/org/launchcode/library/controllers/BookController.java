@@ -6,7 +6,6 @@ import org.launchcode.library.models.Genre;
 import org.launchcode.library.models.data.AuthorDao;
 import org.launchcode.library.models.data.BookDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @Controller
@@ -40,7 +38,7 @@ public class BookController {
 
         model.addAttribute("title", "Add a Book");
         model.addAttribute(new Book());
-        model.addAttribute("authors",authorDao.findAll());
+        model.addAttribute("authors", authorDao.findAll());
         model.addAttribute(("genres"), Genre.values());
 
         return "book/add";
@@ -57,6 +55,7 @@ public class BookController {
             return "book/add";
         }
 
+        if(genres != null)
         for (Genre genre : genres) {
             book.addGenre(genre);
         }
@@ -68,6 +67,8 @@ public class BookController {
         book.setAuthor(author);
         bookDao.save(book);
         model.addAttribute("book", book);
+        model.addAttribute("buttonText", "Add book to car");
+
         return "book/view";
     }
 
@@ -76,24 +77,29 @@ public class BookController {
 
         model.addAttribute("title", "Delete Books");
         model.addAttribute("books", bookDao.findAll());
+
         return "book/remove";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String processRemoveBookForm(Model model, @RequestParam int[] bookIds) {
+
         model.addAttribute("title", "Delete Books");
         for (int id : bookIds) {
             bookDao.delete(bookDao.findById(id).get());
         }
         model.addAttribute("books", bookDao.findAll());
+
         return "book/remove";
     }
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String displayFindByForm(Model model) {
+
         model.addAttribute("title", "Browse: All");
         Iterable<Book> bookList = bookDao.findAll();
         model.addAttribute("bookList", bookList);
+
         return "book/list";
     }
 }

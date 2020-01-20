@@ -3,19 +3,17 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 <div th:replace="fragments :: header"></div>
-
-
 <table class="bookTable">
     <tr>
         <th>Title</th>
         <th>Author</th>
-        <!--            TODO: Add Genre and other attributes-->
+        <th>Genres</th>
     </tr>
     <tr th:each="book : ${bookList}">
-        <td ><a th:href="'/browse/book/' + ${book.id}" th:text="${book.title}"></a></td>
-        <td ><a th:href="'/browse/author/' + ${book.author.id}" th:text="${book.author.name}"></a></td>
+        <td><a th:href="'/browse/book/' + ${book.id}" th:text="${book.title}"></a></td>
+        <td><a th:href="'/browse/author/' + ${book.author.id}" th:text="${book.author.name}"></a></td>
+        <td th:text="${book.genres}"></td>
     </tr>
 </table>
-
 </body>
 </html>

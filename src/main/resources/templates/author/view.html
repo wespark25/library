@@ -4,20 +4,20 @@
 
 <body class="container">
 <div th:replace="fragments :: header"></div>
-
-<h2>Biography</h2>
+<h4>Name</h4>
+<p th:text="${author.name}"></p>
+<h4>Biography</h4>
 <p th:text="${author.bio}"></p>
+<h4>Bibliography</h4>
 <table>
     <tr>
         <th>Title</th>
         <th>Genres</th>
     </tr>
     <tr th:each="book : ${bookList}">
-        <td> <a th:href="@{'/browse/book/' + ${book.id}}" th:text="${book.title}"></a></td>
+        <td><a th:href="@{'/browse/book/' + ${book.id}}" th:text="${book.title}"></a></td>
         <td th:text="${book.genres}"></td>
-<!--        <td th:text="${book.}"-->
     </tr>
-
 </table>
 </body>
 </html>

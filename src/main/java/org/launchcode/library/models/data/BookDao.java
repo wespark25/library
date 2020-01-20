@@ -14,6 +14,4 @@ import java.util.List;
 public interface BookDao extends CrudRepository<Book, Integer> {
 
     List<Book> findByGenres(Genre genre);
-
-    List<Book> findByAuthor(Author author);
 }

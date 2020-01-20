@@ -4,34 +4,31 @@
 
 <body class="container">
 <div th:replace="fragments :: header"></div>
-    <form method="post" th:object="${book}">
-        <div class="form-group">
-            <label th:for="title">Title</label>
-            <input class="form-control" th:field="*{title}"/>
-            <span class="errors" th:errors="*{title}"></span>
-        </div>
-
-<!--        TODO: Make this portion doable through search-->
-        <div class="form-group">
-            <label th:for="authorId">Author</label>
-            <select name="authorId">
-                <option th:each="author : ${authors}" th:text="${author.name}" th:value="${author.id}"></option>
-            </select>
-            <span class="errors" th:errors="*{author}"></span>
-        </div>
-        <div class="form-group">
-            <label th:for="description">Description</label>
-            <input class="form-control" th:field="*{description}"/>
-            <span class="errors" th:errors="*{description}"></span>
-        </div>
-        <div th:each="genre : ${genres}" class="checkbox">
-            <input type="checkbox" name="genres" th:value="${genre}"  />
-            <label th:for="${genre.name}" th:text="${genre.name}"></label>
-            <br />
-        </div>
-
-        <input type="submit" value="Add"/>
-    </form>
+<form method="post" th:object="${book}">
+    <div class="form-group">
+        <label th:for="title">Title</label>
+        <input class="form-control" th:field="*{title}"/>
+        <span class="errors" th:errors="*{title}"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="authorId">Author</label>
+        <select name="authorId">
+            <option th:each="author : ${authors}" th:text="${author.name}" th:value="${author.id}"></option>
+        </select>
+        <span class="errors" th:errors="*{author}"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="description">Description</label>
+        <input class="form-control" th:field="*{description}"/>
+        <span class="errors" th:errors="*{description}"></span>
+    </div>
+    <div th:each="genre : ${genres}" class="checkbox">
+        <input type="checkbox" name="genres" th:value="${genre}"/>
+        <label th:for="${genre.name}" th:text="${genre.name}"></label>
+        <br/>
+    </div>
+    <input type="submit" value="Add"/>
+</form>
 
 </body>
 </html>

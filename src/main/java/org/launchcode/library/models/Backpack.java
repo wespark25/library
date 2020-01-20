@@ -45,14 +45,10 @@ public class Backpack {
         }
     }
 
-    public void removeBooks(List<Book> booksList) {
-        for (Book book : booksList) {
-            books.remove(book);
-        }
-    }
-
     public void removeBook(Book book) {
             books.remove(book);
     }
-
+    public void empty() {
+        this.books.clear();
+    }
 }

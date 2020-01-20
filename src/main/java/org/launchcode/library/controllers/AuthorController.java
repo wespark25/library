@@ -32,6 +32,7 @@ public class AuthorController {
 
         model.addAttribute("title", "Authors");
         model.addAttribute("authors", authorDao.findAll());
+
         return "author/index";
     }
 
@@ -40,6 +41,7 @@ public class AuthorController {
 
         model.addAttribute("title", "Add an author");
         model.addAttribute(new Author());
+
         return "author/add";
     }
 
@@ -54,6 +56,7 @@ public class AuthorController {
         model.addAttribute("title", author.getName());
         model.addAttribute("author", author);
         authorDao.save(author);
+
         return "author/view";
     }
 
@@ -62,6 +65,7 @@ public class AuthorController {
 
         model.addAttribute("title", "Delete Authors");
         model.addAttribute("authors", authorDao.findAll());
+
         return "author/remove";
     }
 
@@ -75,6 +79,7 @@ public class AuthorController {
         }
         authorDao.delete(author);;
         model.addAttribute("authors", authorDao.findAll());
+
         return "author/remove";
     }
 
@@ -82,6 +87,7 @@ public class AuthorController {
     public String displayFindByForm(Model model) {
             model.addAttribute("title", "Browse: Authors");
             model.addAttribute("authors", authorDao.findAll());
+
             return "author/list";
     }
 }

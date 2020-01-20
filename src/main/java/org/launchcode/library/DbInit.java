@@ -1,13 +1,15 @@
-package org.launchcode.library.models.data;
+package org.launchcode.library;
 
+import com.mysql.cj.x.protobuf.MysqlxExpr;
+import com.sun.tools.javac.jvm.Gen;
 import org.launchcode.library.models.*;
+import org.launchcode.library.models.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class DbInit implements CommandLineRunner {
@@ -34,16 +36,18 @@ public class DbInit implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if(bookDao.count() == 0 && authorDao.count() == 0){
+            List<Genre> genres = new ArrayList<>();
+            genres.add(Genre.FICTION);
 
             Author deLillo = new Author("Don DeLillo", "Pretty dang good author");
-            Book whiteNoise = new Book("White Noise", deLillo, "Don't get me started on that dang barn");
-            Book underWorld = new Book("Underworld", deLillo, "This book is a home run");
+            Book whiteNoise = new Book("White Noise", deLillo, "Don't get me started on that dang barn", genres);
+            Book underWorld = new Book("Underworld", deLillo, "This book is a home run", genres);
             authorDao.save(deLillo);
             bookDao.save(whiteNoise);
             bookDao.save(underWorld);
 
             Author wallace = new Author("David Foster Wallace", "Neurotic");
-            Book infiniteJest = new Book("Infinite Jest", wallace, "About as good as it is mentally taxing");
+            Book infiniteJest = new Book("Infinite Jest", wallace, "About as good as it is mentally taxing", genres);
             authorDao.save(wallace);
             bookDao.save(infiniteJest);
         }

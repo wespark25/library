@@ -40,10 +40,8 @@ public class Cart {
     public void removeBook(Book book) {
         this.books.remove(book);
     }
-    public void removeBooks(List<Book> booksList) {
-        for (Book book : booksList) {
-            books.remove(book);
-        }
+    public void empty() {
+        this.books.clear();
     }
     public boolean isCheckedOut() {
         return checkedOut;

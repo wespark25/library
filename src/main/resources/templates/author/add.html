@@ -4,17 +4,17 @@
 
 <body class="container">
 <div th:replace="fragments :: header"></div>
-    <form method="post" th:object="${author}">
-        <div class="form-group">
-            <label th:name="name">Name</label>
-            <input class="form-control" th:field="*{name}"/>
-            <span th:errors="*{name}" class="errors"></span>
-        </div>
-        <div class="form-group">
-            <label th:name="bio">Bio</label>
-            <input class="form-control" th:field="*{bio}"/>
-        </div>
-        <input type="submit"/>
-    </form>
+<form method="post" th:object="${author}">
+    <div class="form-group">
+        <label th:name="name">Name</label>
+        <input class="form-control" th:field="*{name}"/>
+        <span th:errors="*{name}" class="errors"></span>
+    </div>
+    <div class="form-group">
+        <label th:name="bio">Bio</label>
+        <input class="form-control" th:field="*{bio}"/>
+    </div>
+    <input type="submit"/>
+</form>
 </body>
 </html>

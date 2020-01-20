@@ -5,17 +5,16 @@
 </head>
 <body class="container">
 <div th:replace="fragments :: header"></div>
-
-
 <form method="post">
+    <ul class="noDot">
+        <li th:each="genre : ${genres}">
+            <input type="radio"
+                   name="genre"
+                   th:value="${genre}">
+            <label th:for="${genre}" th:text="${genre.name}"></label>
+        </li>
+        <input type="submit" value="Search">
+    </ul>
 </form>
-<table>
-    <tr th:each="genre : ${genres}">
-        <td ><a  th:text="${genre}"></a></td>
-<!--        <td ><a th:href="@{'/checkout/list/' + ${author.id}}" th:text="${author.name}"></a></td>-->
-        <!--        <a th:href="@{'/category/edit/' + ${category.idCategory}}">view</a>
-        -->
-    </tr>
-</table>
 </body>
 </html>
