@@ -15,8 +15,7 @@ public class UserPrincipalDetailService implements UserDetailsService {
         this.userDao = userDao;
     }
 
-//    TODO (RYAN): if the user logs in with the wrong credentials he is stuck and it won't send him back to the login
-//    TODO (RYAN) page and show him the appropriate message, which it should do automatically. Any thoughts on how to fix this?
+//    To fix
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException{
 

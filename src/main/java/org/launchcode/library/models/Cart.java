@@ -9,7 +9,6 @@ import java.util.List;
 @Entity
 public class Cart {
 
-//    TODO: After User object is created I need to link individual carts with different users.
     @GeneratedValue
     @Id
     public int id;

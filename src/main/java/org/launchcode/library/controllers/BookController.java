@@ -60,8 +60,6 @@ public class BookController {
             book.addGenre(genre);
         }
 
-//        TODO: Add the Genre feature
-
         model.addAttribute("title", book.getTitle());
         Author author = authorDao.findById(authorId).get();
         book.setAuthor(author);

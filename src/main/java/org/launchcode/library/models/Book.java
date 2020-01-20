@@ -35,7 +35,6 @@ public class Book {
     @ElementCollection
     private List<Genre> genres;
 
-//    TODO: change the name of this to due date
     private LocalTime timeCheckedOut;
 
     private boolean inCart;
