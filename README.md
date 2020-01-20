@@ -6,12 +6,17 @@ Data is handled by Hibernate, MAMP, and MySql.
 
 
 Administrator login info
+  
   username: admin
+  
   password: pass
  
 User login info
+  
   username: user
+  
   password: pass
+  
   
 WARNING as of 1-20-2020 if you log in with incorrect credentials you will recieve a bug. This will be fixed very soon.
 
