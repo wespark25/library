@@ -12,6 +12,5 @@ import java.util.List;
 @Repository
 @Transactional
 public interface BookDao extends CrudRepository<Book, Integer> {
-
-    List<Book> findByGenres(Genre genre);
+    List<Book> findByGenresContaining(Genre genre);
 }

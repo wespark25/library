@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -66,12 +65,12 @@ public class BrowseController {
     public String displayGenreList(Model model, @RequestParam Genre genre) {
 
         model.addAttribute("title", "Genre");
-        List<Book> books = bookDao.findByGenres(genre);
-        List<Book> bookList = new ArrayList<>();
-        for (int i = 0; i < books.size(); i = i+2) {
-            bookList.add(books.get(i));
-        }
-        model.addAttribute("bookList", bookList);
+        List<Book> books = bookDao.findByGenresContaining(genre);
+//        List<Book> bookList = new ArrayList<>();
+//        for (int i = 0; i < books.size(); i = i+2) {
+//            bookList.add(books.get(i));
+//        }
+        model.addAttribute("bookList", books);
 
         return "book/list";
     }

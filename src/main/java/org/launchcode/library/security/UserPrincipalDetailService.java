@@ -17,11 +17,14 @@ public class UserPrincipalDetailService implements UserDetailsService {
 
 //    To fix
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException{
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
 
-            User user = this.userDao.findByUsername(s);
+
+        User user = this.userDao.findByUsername(s);
+        if (user != null) {
             UserPrincipal userPrincipal = new UserPrincipal(user);
-
-        return userPrincipal;
+            return userPrincipal;
+        }
+        throw new UsernameNotFoundException("User not found");
     }
 }
