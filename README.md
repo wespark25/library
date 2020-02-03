@@ -2,7 +2,9 @@
 This is the Spring Boot Application I completed from scratch for Launch Code.
 
 Frontend design is a combination of HTML, CSS, and Thymeleaf.
+
 Data is handled by Hibernate, MAMP, and MySql.
+
 Login and sessions are managed by Spring Security.
 
 
