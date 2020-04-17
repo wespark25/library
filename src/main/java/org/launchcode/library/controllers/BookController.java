@@ -65,7 +65,7 @@ public class BookController {
         book.setAuthor(author);
         bookDao.save(book);
         model.addAttribute("book", book);
-        model.addAttribute("buttonText", "Add book to car");
+        model.addAttribute("buttonText", "Add book to cart");
 
         return "book/view";
     }

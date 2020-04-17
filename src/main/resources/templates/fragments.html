@@ -16,17 +16,17 @@ but that is due to change in the future-->
 <div th:fragment="header">
     <h1 th:fragment="title" th:text="${title}">Default Title</h1>
     <nav sec:authorize="hasRole('ROLE_USER')" th:fragment="browseNavigation">
-        <a href="/browse">Browse</a> |
-        <a href="/checkout">Checkout</a> |
-        <a href="/return">Return</a> |
-        <a href="/logout">Logout</a>
+        <a class="navOption" href="/browse">Browse</a> |
+        <a class="navOption" href="/checkout">Checkout</a> |
+        <a class="navOption" href="/return">Return</a> |
+        <a class="navOption" href="/logout">Logout</a>
     </nav>
     <nav sec:authorize="hasRole('ROLE_ADMIN')" th:fragment="editNavigation">
-        <a href="/book/add">Add Book</a> |
-        <a href="/book/remove">Remove Book</a> |
-        <a href="/author/add">Add Author</a> |
-        <a href="/author/remove">Remove Author</a> |
-        <a href="/logout">Logout</a>
+        <a class="navOption" href="/book/add">Add Book</a> |
+        <a class="navOption" href="/book/remove">Remove Book</a> |
+        <a class="navOption" href="/author/add">Add Author</a> |
+        <a class="navOption" href="/author/remove">Remove Author</a> |
+        <a class="navOption" href="/logout">Logout</a>
     </nav>
     <br>
 </div>
