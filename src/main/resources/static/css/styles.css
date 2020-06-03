@@ -8,3 +8,35 @@ ul.noDot {
      border-style: solid;
      border-radius: 10px;
  }*/
+/*
+body {
+    color: green;
+    background-image: url('/images/libraryBackground.jpeg');
+}
+
+#header {
+    background: white;
+    border-radius: 10px;
+    width: 500px;
+    padding-left: 5px;
+    padding-right: 5px;
+}*/
+
+#authorWarning {
+    color: white;
+    background: grey;
+    width: 465px;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 5px;
+}
+
+/* .navOption {
+
+    border: 2px solid black;
+    }*/
+
+body{
+    background-color: beige;
+
+}

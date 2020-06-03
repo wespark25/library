@@ -3,6 +3,7 @@ package org.launchcode.library.controllers;
 
 import org.launchcode.library.models.*;
 import org.launchcode.library.models.data.*;
+import org.launchcode.library.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +34,8 @@ public class BrowseController {
 
     @Autowired
     UserDao userDao;
+
+    UserPrincipal userPrincipal;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -83,9 +86,11 @@ public class BrowseController {
         model.addAttribute("title", book.getTitle());
         model.addAttribute("buttonText", book.isInCart() ? "Remove from cart" : "Add to cart");
         model.addAttribute("book", book);
+        model.addAttribute("user", userDao.findByUsername(principal.getName()));
 
         return "book/view";
     }
+
     @RequestMapping(value = "browse/book/{bookId}", method = RequestMethod.POST)
     public String processViewBookForm(Model model, @PathVariable int bookId,
                                       @RequestParam String decision,
@@ -190,9 +195,9 @@ public class BrowseController {
             Book book = bookDao.findById(id).get();
             book.setCheckedOut(false);
             bookDao.save(book);
+            backpack.removeBook(book);
         }
 
-        backpack.empty();
         backpackDao.save(backpack);
         }
         model.addAttribute("message", "Select at least one book");

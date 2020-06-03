@@ -50,7 +50,7 @@ public class BookController {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add a Book");
-            model.addAttribute("authors",authorDao.findAll());
+            model.addAttribute("authors", authorDao.findAll());
             model.addAttribute(("genres"), Genre.values());
             return "book/add";
         }

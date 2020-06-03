@@ -11,17 +11,17 @@
 
 </head>
 <body>
-<!--The entire nav bar was previously available for admin users to see. For now only the editNavigation section
-but that is due to change in the future-->
-<div th:fragment="header">
+
+<div id="header" th:fragment="header">
     <h1 th:fragment="title" th:text="${title}">Default Title</h1>
-    <nav sec:authorize="hasRole('ROLE_USER')" th:fragment="browseNavigation">
-        <a class="navOption" href="/browse">Browse</a> |
-        <a class="navOption" href="/checkout">Checkout</a> |
-        <a class="navOption" href="/return">Return</a> |
-        <a class="navOption" href="/logout">Logout</a>
+    <nav id="adminNav" sec:authorize="hasRole('ROLE_USER')" th:fragment="browseNavigation" style="text-decoration: none;">
+            <a class="navOption" href="/browse">Browse</a> |
+            <a class="navOption" href="/checkout">Checkout</a> |
+            <a class="navOption" href="/return">Return</a> |
+            <a class="navOption" href="/logout">Logout</a>
     </nav>
-    <nav sec:authorize="hasRole('ROLE_ADMIN')" th:fragment="editNavigation">
+    <br>
+    <nav id="userNav" sec:authorize="hasRole('ROLE_ADMIN')" th:fragment="editNavigation">
         <a class="navOption" href="/book/add">Add Book</a> |
         <a class="navOption" href="/book/remove">Remove Book</a> |
         <a class="navOption" href="/author/add">Add Author</a> |

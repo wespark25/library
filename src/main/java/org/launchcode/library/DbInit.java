@@ -39,15 +39,33 @@ public class DbInit implements CommandLineRunner {
             List<Genre> genres = new ArrayList<>();
             genres.add(Genre.FICTION);
 
-            Author deLillo = new Author("Don DeLillo", "Pretty dang good author");
-            Book whiteNoise = new Book("White Noise", deLillo, "Don't get me started on that dang barn", genres);
-            Book underWorld = new Book("Underworld", deLillo, "This book is a home run", genres);
+            Author deLillo = new Author("Don DeLillo", "American novelist whose postmodernist works portray " +
+                    "the anomie of an America cosseted by material excess and stupefied by empty mass culture and politics.");
+            Book whiteNoise = new Book("White Noise", deLillo, "When an industrial accident unleashes an" +
+                    " \"airborne toxic event\", a lethal black chemical cloud floats over their lives. The menacing cloud" +
+                    " is a more urgent and visible version of the \"white noise\" engulfing the Gladneys - radio transmissions," +
+                    " sirens, microwaves, ultrasonic appliances, and TV murmurings - pulsing with life yet suggesting" +
+                    " something ominous.", genres);
+            Book underWorld = new Book("Underworld", deLillo, "While Eisenstein documented the forces " +
+                    "of totalitarianism and Stalinism upon the faces of the Russian peoples, DeLillo offers a stunning," +
+                    " at times overwhelming, document of the twin forces of the Cold War and American culture, " +
+                    "compelling that \"swerve from evenness\" in which he finds events and people both wondrous and" +
+                    " horrifying.", genres);
             authorDao.save(deLillo);
             bookDao.save(whiteNoise);
             bookDao.save(underWorld);
 
-            Author wallace = new Author("David Foster Wallace", "Neurotic");
-            Book infiniteJest = new Book("Infinite Jest", wallace, "About as good as it is mentally taxing", genres);
+            Author wallace = new Author("David Foster Wallace", "American novelist, short-story writer, and " +
+                    "essayist whose dense works provide a dark, often satirical analysis of American culture.");
+            Book infiniteJest = new Book("Infinite Jest", wallace, "A gargantuan, mind-altering comedy " +
+                    "about the pursuit of happiness in America. Set in an addicts' halfway house and a tennis academy, and" +
+                    " featuring the most endearingly screwed-up family to come along in recent fiction, Infinite Jest " +
+                    "explores essential questions about what entertainment is and why it has come to so dominate our" +
+                    " lives; about how our desire for entertainment affects our need to connect with other people; and " +
+                    "about what the pleasures we choose say about who we are.\n\n Equal parts philosophical quest and" +
+                    " screwball comedy, Infinite Jest bends every rule of fiction without sacrificing for a moment its" +
+                    " own entertainment value. It is an exuberant, uniquely American exploration of the passions that " +
+                    "make us human - and one of those rare books that renew the idea of what a novel can do.", genres);
             authorDao.save(wallace);
             bookDao.save(infiniteJest);
         }

@@ -3,9 +3,7 @@ package org.launchcode.library.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -20,7 +18,7 @@ public class Book {
     private String title;
 
     @NotNull
-    @Size(min=1,max=100)
+    @Size(min=1,max=5000)
     private String description;
 
     @ManyToOne

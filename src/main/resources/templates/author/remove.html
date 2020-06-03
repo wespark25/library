@@ -10,8 +10,8 @@
         <label th:for="${author.id}" th:text="${author.name}"></label>
     </div>
     <input type="submit" value="Remove Author"/>
-    <p>WARNING! THIS IS WILL ALSO REMOVE BOOKS ASSOCIATED WITH REMOVED AUTHORS</p>
+    <p id="authorWarning">WARNING! This will also remove all books written by the selected author</p>
 </form>
-<p>No authors in library</p>
+<p th:unless="${authors} and ${authors.size()}":>No authors in library</p>
 </body>
 </html>
